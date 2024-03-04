@@ -11,5 +11,7 @@ router.post(
 );
 router.patch('/:id', EventController.updateEvent);
 router.delete('/:id', EventController.deleteEvent);
+router.get('/:id', EventController.getSingleEvent);
+router.get('/', EventController.getEvents);
 
 export const eventRoutes = router;
