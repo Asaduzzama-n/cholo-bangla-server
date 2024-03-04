@@ -15,6 +15,31 @@ const createEvent = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getEvents = catchAsync(async (req: Request, res: Response) => {
+  const options = req.query;
+  const result = await EventServices.getEvents(options);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Events retrieved successful!',
+    meta: result?.meta,
+    data: result?.data,
+  });
+});
+
+const getSingleEvent = catchAsync(async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const result = await EventServices.getSingleEvent(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Event retrieved successful!',
+    data: result,
+  });
+});
+
 const updateEvent = catchAsync(async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   const result = await EventServices.updateEvent(id, req.body);
@@ -41,6 +66,8 @@ const deleteEvent = catchAsync(async (req: Request, res: Response) => {
 
 export const EventController = {
   createEvent,
+  getEvents,
+  getSingleEvent,
   updateEvent,
   deleteEvent,
 };
