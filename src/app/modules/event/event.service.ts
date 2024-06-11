@@ -1,7 +1,10 @@
-import { IGenericResponse } from './../../../interfaces/common';
+import {
+  IGenericResponse,
+  IPaginationOptions,
+} from './../../../interfaces/common';
 import { Event } from '@prisma/client';
 import prisma from '../../../shared/prisma';
-import { IPaginationOptions, IWhereClause } from './event.interface';
+import { IWhereClause } from './event.interface';
 import ApiError from '../../../errors/ApiError';
 import httpStatus from 'http-status';
 
@@ -94,6 +97,9 @@ const updateEvent = async (
 
 const deleteEvent = async (id: number): Promise<Event> => {
   const result = await prisma.event.delete({ where: { id } });
+  if (!result) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create reservation!');
+  }
   return result;
 };
 

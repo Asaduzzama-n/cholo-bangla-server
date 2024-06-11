@@ -10,6 +10,17 @@ router.post(
   validateRequest(AuthValidation.createUserZodSchema),
   AuthController.createUser,
 );
+router.post(
+  '/login',
+  validateRequest(AuthValidation.userLoginZodSchema),
+  AuthController.loginUser,
+);
+router.post(
+  '/refresh-token',
+  validateRequest(AuthValidation.refreshTokenZodValidation),
+  AuthController.refreshToken,
+);
+router.get('/user', AuthController.getUser);
 router.delete('/:id', AuthController.deleteUser);
 
 export const authRoutes = router;
