@@ -6,3 +6,11 @@ export type IGenericResponse<T> = {
   };
   data: T;
 };
+
+export type IPaginationOptions = {
+  page?: string | undefined;
+  limit?: string | undefined;
+  sortBy?: string;
+  searchTerm?: string;
+  sortOrder?: 'asc' | 'desc';
+};

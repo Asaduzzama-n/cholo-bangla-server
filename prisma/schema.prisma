@@ -22,10 +22,10 @@ enum USER_ROLE {
 model User {
   id                Int           @id @default(autoincrement())
   firstName         String
-  lastName          String
+  lastName          String?
   email             String        @unique
   password          String
-  profile           String
+  profile           String?
   role              USER_ROLE
   createdAt         DateTime      @default(now())
   passwordChangedAt DateTime?
